@@ -1,0 +1,21 @@
+server: # Configuração do servidor
+  port: 8080 # Porta que a aplicação irá rodar
+
+spring: # Configuração do spring
+  application:
+    name: client-app # Nome que a aplicação terá
+
+  sql: # Configuração do JPA
+    init: # Ao incializar
+      continue-on-error: true # Se a conexão falhar, a aplicação continua a rodar
+
+  datasource: # ???
+    url: jdbc:postgresql://localhost:5432/postgres # URL da conexão, no caso, o docker na porta 5432
+    username: admin # Usuário para conectar
+    password: root # Senha para conectar
+    driver-class-name: org.postgresql.Driver # Driver do banco utilizado
+
+  jpa:  # Configuração do JPA
+    generate-ddl: false # Gerar as tabelas mapeadas com @Entity
+    show-sql: true # Exibir códigos SQL no terminal
+
