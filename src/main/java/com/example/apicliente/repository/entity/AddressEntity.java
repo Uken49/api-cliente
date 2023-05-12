@@ -12,18 +12,17 @@ public class AddressEntity {
 
     @Id
     UUID id;
-    String zipCode;
+    Integer zipCode;
     String street;
     String complement;
     String neighborhood;
     String city;
     String state;
-    Integer house_number;
-    LocalDateTime created_at;
-    LocalDateTime updated_at;
-
+    Integer houseNumber;
+    LocalDateTime createdAt;
+    LocalDateTime updatedAt;
     @Builder
-    public AddressEntity(String zipCode, String street, String complement, String neighborhood, String city, String state, Integer house_number) {
+    public AddressEntity(Integer zipCode, String street, String complement, String neighborhood, String city, String state, Integer houseNumber) {
         this.id = UUID.randomUUID();
         this.zipCode = zipCode;
         this.street = street;
@@ -31,16 +30,16 @@ public class AddressEntity {
         this.neighborhood = neighborhood;
         this.city = city;
         this.state = state;
-        this.house_number = house_number;
-        this.created_at = LocalDateTime.now();
-        this.updated_at = LocalDateTime.now();
+        this.houseNumber = houseNumber;
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
 
     public UUID getId() {
         return id;
     }
 
-    public String getZipCode() {
+    public Integer getZipCode() {
         return zipCode;
     }
 
@@ -64,16 +63,16 @@ public class AddressEntity {
         return state;
     }
 
-    public Integer getHouse_number() {
-        return house_number;
+    public Integer getHouseNumber() {
+        return houseNumber;
     }
 
-    public LocalDateTime getCreated_at() {
-        return created_at;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public LocalDateTime getUpdated_at() {
-        return updated_at;
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
     }
 
 }
