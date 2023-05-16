@@ -13,20 +13,24 @@ public class ClientEntity {
     @Id
     UUID id;
     String name;
-    Integer cpf;
-    LocalDate birthDate;
+    String cpf;
+    LocalDate birthdate;
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     @OneToOne(cascade = CascadeType.ALL)
     AddressEntity address;
     LocalDateTime createdAt;
     LocalDateTime updatedAt;
 
+    public ClientEntity() {
+        this.id = UUID.randomUUID();
+    }
+
     @Builder
-    public ClientEntity(String name, Integer cpf, LocalDate birthDate, AddressEntity address) {
+    public ClientEntity(String name, String cpf, LocalDate birthdate, AddressEntity address) {
         this.id = UUID.randomUUID();
         this.name = name;
         this.cpf = cpf;
-        this.birthDate = birthDate;
+        this.birthdate = birthdate;
         this.address = address;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
@@ -40,12 +44,12 @@ public class ClientEntity {
         return name;
     }
 
-    public Integer getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public LocalDate getBirthDate() {
-        return birthDate;
+    public LocalDate getBirthdate() {
+        return birthdate;
     }
 
     public AddressEntity getAddress() {

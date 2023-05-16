@@ -9,10 +9,9 @@ import java.util.UUID;
 @Entity
 @Table(name = "Address")
 public class AddressEntity {
-
     @Id
     UUID id;
-    Integer zipCode;
+    String zipCode;
     String street;
     String complement;
     String neighborhood;
@@ -21,8 +20,13 @@ public class AddressEntity {
     Integer houseNumber;
     LocalDateTime createdAt;
     LocalDateTime updatedAt;
+
+    public AddressEntity() {
+        this.id = UUID.randomUUID();
+    }
+
     @Builder
-    public AddressEntity(Integer zipCode, String street, String complement, String neighborhood, String city, String state, Integer houseNumber) {
+    public AddressEntity(String zipCode, String street, String complement, String neighborhood, String city, String state, Integer houseNumber) {
         this.id = UUID.randomUUID();
         this.zipCode = zipCode;
         this.street = street;
@@ -39,7 +43,7 @@ public class AddressEntity {
         return id;
     }
 
-    public Integer getZipCode() {
+    public String getZipCode() {
         return zipCode;
     }
 

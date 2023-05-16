@@ -8,9 +8,7 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface ClientMapper {
-
     ClientModel fromModel(ClientRequest clientRequest);
-
-    ClientEntity fromEntity(ClientRequest clientRequest);
+    ClientEntity fromEntity(ClientModel clientModel);
     ClientResponse fromResponse(ClientEntity clientEntity);
 }

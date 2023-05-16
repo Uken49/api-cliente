@@ -7,8 +7,8 @@ import java.util.UUID;
 public record ClientResponse(
         UUID id,
         String name,
-        Integer cpf,
-        LocalDate birthDate,
+        String cpf,
+        LocalDate birthdate,
         AddressResponse address,
         LocalDateTime createdAt,
         LocalDateTime updatedAt
@@ -17,7 +17,7 @@ public record ClientResponse(
 
     public record AddressResponse(
             UUID id,
-            Integer zipCode,
+            String zipCode,
             String street,
             String complement,
             String neighborhood,
