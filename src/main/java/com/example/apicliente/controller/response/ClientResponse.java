@@ -23,7 +23,8 @@ public record ClientResponse(
             String neighborhood,
             String city,
             String state,
-            Integer house_number,
-            LocalDateTime created
+            Integer houseNumber,
+            LocalDateTime createdAt,
+            LocalDateTime updatedAt
     ){}
 }

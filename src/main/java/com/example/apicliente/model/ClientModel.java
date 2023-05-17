@@ -10,13 +10,12 @@ import java.time.LocalDate;
 import org.hibernate.validator.constraints.br.CPF;
 
 public record ClientModel(
-        @NotBlank
+        @NotBlank(message = "name: não pode ser nulo")
         String name,
         @CPF
         String cpf,
         @PastOrPresent(message = "A data não pode ser futura")
         LocalDate birthdate,
-        @Valid
         AddressModel address
 ) {
 
@@ -31,11 +30,14 @@ public record ClientModel(
     public ClientModel clientWithAddress(AddressApiViaCep addressViaCep) {
         return this.toBuilder()
                 .address(AddressModel.builder()
-                        .zipCode(addressViaCep.cep())
+                        .zipCode(this.address.zipCode())
+                        .complement(this.address.complement())
                         .street(addressViaCep.logradouro())
                         .city(addressViaCep.localidade())
                         .state(addressViaCep.uf())
-                        .neighborhood(addressViaCep.bairro()).build()
+                        .houseNumber(this.address.houseNumber())
+                        .neighborhood(addressViaCep.bairro())
+                        .build()
                 ).build();
     }
 }
