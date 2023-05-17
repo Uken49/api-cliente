@@ -15,9 +15,9 @@ CREATE TABLE IF NOT EXISTS ADDRESS(
         street varchar(256) NOT NULL,
         complement varchar(256),
         neighborhood varchar(100) NOT NULL,
-        city varchar(100 NOT NULL,
+        city varchar(100) NOT NULL,
         state varchar(100) NOT NULL,
-        house_number integerNOT NULL,
+        house_number integer NOT NULL,
         created_at timestamp NOT NULL,
         updated_at timestamp NOT NULL,
         PRIMARY KEY (id)
