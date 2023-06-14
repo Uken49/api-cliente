@@ -5,13 +5,18 @@ import com.example.apicliente.controller.response.ClientResponse;
 import com.example.apicliente.service.ClientService;
 import jakarta.validation.Valid;
 import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/clients")
 @RequiredArgsConstructor
+@Validated
 public class ClientController {
 
     private final ClientService clientService;
@@ -24,15 +29,16 @@ public class ClientController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<ClientResponse> getAll(){
+    public List<ClientResponse> getClientBy(
+            @RequestParam(required = false) UUID id,
+            @RequestParam(required = false) @CPF @Valid String cpf
+    ){
+        if (Objects.nonNull(id)){
+            return clientService.getClientById(id);
+        } else if (Objects.nonNull(cpf)) {
+            return clientService.getClientByCpf(cpf);
+        }
+
         return clientService.getAllClients();
     }
-
-    @GetMapping("/{idOrCpf}")
-    @ResponseStatus(HttpStatus.OK)
-    public ClientResponse getClient(@PathVariable String idOrCpf){
-        return clientService.getClientByIdOrCpf(idOrCpf);
-    }
-
-
 }

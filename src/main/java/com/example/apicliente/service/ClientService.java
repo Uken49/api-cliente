@@ -11,7 +11,6 @@ import com.example.apicliente.model.ClientModel;
 import com.example.apicliente.repository.ClientRepository;
 import com.example.apicliente.repository.entity.ClientEntity;
 import com.example.apicliente.util.LoggerUtil;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
@@ -44,27 +43,20 @@ public class ClientService {
         return mapper.fromResponse(clientSave);
     }
 
-    public ClientResponse getClientByIdOrCpf(String idOrCpf) {
+    public List<ClientResponse> getClientById(UUID id) {
 
-        final int cpfLength = 11;
-        final ClientEntity clientEntity;
+        final ClientEntity clientEntity = repository.findById(id).orElseThrow(
+                () -> new ClientNotFoundException("Cliente com id: %s não foi encontrado".formatted(id))
+        );
 
-        if (idOrCpf.length() == cpfLength){
-            final String cpf = idOrCpf;
+        return List.of(mapper.fromResponse(clientEntity));
+    }
 
-            clientEntity = repository.findByCpf(cpf).orElseThrow(
-                    () -> new ClientNotFoundException("Cliente com cpf: %s não foi encontrado".formatted(cpf))
-            );
-
-        } else {
-            final UUID id = UUID.fromString(idOrCpf);
-
-            clientEntity = repository.findById(id).orElseThrow(
-                    () -> new ClientNotFoundException("Cliente com id: %s não foi encontrado".formatted(id))
-            );
-        }
-
-        return mapper.fromResponse(clientEntity);
+    public List<ClientResponse> getClientByCpf(String cpf) {
+        ClientEntity clientEntity = repository.findByCpf(cpf).orElseThrow(
+                () -> new ClientNotFoundException("Cliente com cpf: %s não foi encontrado".formatted(cpf))
+        );
+        return List.of(mapper.fromResponse(clientEntity));
     }
 
     public List<ClientResponse> getAllClients() {
