@@ -43,13 +43,13 @@ public class ClientService {
         return mapper.fromResponse(clientSave);
     }
 
-    public List<ClientResponse> getClientById(UUID id) {
+    public ClientResponse getClientById(UUID id) {
 
         final ClientEntity clientEntity = repository.findById(id).orElseThrow(
                 () -> new ClientNotFoundException("Cliente com id: %s não foi encontrado".formatted(id))
         );
 
-        return List.of(mapper.fromResponse(clientEntity));
+        return mapper.fromResponse(clientEntity);
     }
 
     public List<ClientResponse> getClientByCpf(String cpf) {

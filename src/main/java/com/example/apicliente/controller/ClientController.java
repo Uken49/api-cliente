@@ -27,15 +27,18 @@ public class ClientController {
         return clientService.create(clientRequest);
     }
 
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ClientResponse getClientById(@PathVariable UUID id){
+        return clientService.getClientById(id);
+    }
+
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<ClientResponse> getClientBy(
-            @RequestParam(required = false) UUID id,
+    public List<ClientResponse> getClientByCpf(
             @RequestParam(required = false) @CPF @Valid String cpf
     ){
-        if (Objects.nonNull(id)){
-            return clientService.getClientById(id);
-        } else if (Objects.nonNull(cpf)) {
+        if (Objects.nonNull(cpf)) {
             return clientService.getClientByCpf(cpf);
         }
 
