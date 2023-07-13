@@ -5,9 +5,9 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name = "ApiViaCep", url = "https://viacep.com.br/ws/")
+@FeignClient(name = "apiViaCep", url = "https://viacep.com.br/ws/")
 public interface ApiViaCep {
 
-    @GetMapping("{cep}/json")
-    AddressApiViaCep viaCepString(@PathVariable String cep);
+    @GetMapping("/{zipCode}/json")
+    AddressApiViaCep viaCepString(@PathVariable("zipCode") String zipCode);
 }
